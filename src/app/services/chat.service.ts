@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Tutorial } from '../models/tutorial.model';
+import { Observable, of } from 'rxjs';
+import { chat } from '../models/chat.model';
 
-const baseUrl = 'http://localhost:8080/api/tutorials';
+const baseUrl = 'http://localhost:5115/api/Message';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TutorialService {
+export class ChatService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(): Observable<Tutorial[]> {
-    return this.http.get<Tutorial[]>(baseUrl);
+  getAll() {
+    return this.http.get(baseUrl);
   }
 
-  get(id: any): Observable<Tutorial> {
-    return this.http.get(`${baseUrl}/${id}`);
+  get(id: any): Observable<chat> {
+    return of({
+      "id":1,
+      "data":"test"
+    })
   }
 
   create(data: any): Observable<any> {
@@ -36,7 +39,7 @@ export class TutorialService {
     return this.http.delete(baseUrl);
   }
 
-  findByTitle(title: any): Observable<Tutorial[]> {
-    return this.http.get<Tutorial[]>(`${baseUrl}?title=${title}`);
+  findByTitle(title: any): Observable<chat[]> {
+    return this.http.get<chat[]>(`${baseUrl}?title=${title}`);
   }
 }

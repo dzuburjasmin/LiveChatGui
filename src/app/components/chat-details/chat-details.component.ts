@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { TutorialService } from 'src/app/services/tutorial.service';
+import { ChatService } from 'src/app/services/chat.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Tutorial } from 'src/app/models/tutorial.model';
+import { chat } from 'src/app/models/chat.model';
 
 @Component({
-  selector: 'app-tutorial-details',
-  templateUrl: './tutorial-details.component.html',
-  styleUrls: ['./tutorial-details.component.css']
+  selector: 'app-chat-details',
+  templateUrl: './chat-details.component.html',
+  styleUrls: ['./chat-details.component.css']
 })
-export class TutorialDetailsComponent implements OnInit {
+export class ChatDetailsComponent implements OnInit {
 
-  currentTutorial: Tutorial = {
+  currentChat: chat = {
     title: '',
     description: '',
     published: false
@@ -18,20 +18,20 @@ export class TutorialDetailsComponent implements OnInit {
   message = '';
 
   constructor(
-    private tutorialService: TutorialService,
+    private chatService: ChatService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
     this.message = '';
-    this.getTutorial(this.route.snapshot.params.id);
+    this.getChat(this.route.snapshot.params.id);
   }
 
-  getTutorial(id: string): void {
-    this.tutorialService.get(id)
+  getChat(id: string): void {
+    this.chatService.get(id)
       .subscribe(
         data => {
-          this.currentTutorial = data;
+          this.currentChat = data;
           console.log(data);
         },
         error => {
@@ -41,17 +41,17 @@ export class TutorialDetailsComponent implements OnInit {
 
   updatePublished(status: boolean): void {
     const data = {
-      title: this.currentTutorial.title,
-      description: this.currentTutorial.description,
+      title: this.currentChat.title,
+      description: this.currentChat.description,
       published: status
     };
 
     this.message = '';
 
-    this.tutorialService.update(this.currentTutorial.id, data)
+    this.chatService.update(this.currentChat.id, data)
       .subscribe(
         response => {
-          this.currentTutorial.published = status;
+          this.currentChat.published = status;
           console.log(response);
           this.message = response.message ? response.message : 'The status was updated successfully!';
         },
@@ -60,26 +60,26 @@ export class TutorialDetailsComponent implements OnInit {
         });
   }
 
-  updateTutorial(): void {
+  updateChat(): void {
     this.message = '';
 
-    this.tutorialService.update(this.currentTutorial.id, this.currentTutorial)
+    this.chatService.update(this.currentChat.id, this.currentChat)
       .subscribe(
         response => {
           console.log(response);
-          this.message = response.message ? response.message : 'This tutorial was updated successfully!';
+          this.message = response.message ? response.message : 'This chat was updated successfully!';
         },
         error => {
           console.log(error);
         });
   }
 
-  deleteTutorial(): void {
-    this.tutorialService.delete(this.currentTutorial.id)
+  deleteChat(): void {
+    this.chatService.delete(this.currentChat.id)
       .subscribe(
         response => {
           console.log(response);
-          this.router.navigate(['/tutorials']);
+          this.router.navigate(['/chats']);
         },
         error => {
           console.log(error);
