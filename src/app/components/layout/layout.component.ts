@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { chat } from 'src/app/models/chat.model';
+import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -9,15 +9,13 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class LayoutComponent implements OnInit {
 
-  chats?: chat[];
-  currentChat: chat = {};
-  currentIndex = -1;
-  title = '';
-
-  constructor(private chatService: ChatService) { }
+  constructor(private authService: AuthService, private chatService: ChatService) { }
 
   ngOnInit(): void {
   }
 
- 
+  onLogout(){
+    this.authService.logout();
+    //this.chatService.stopChat();
+  }
 }

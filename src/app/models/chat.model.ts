@@ -1,4 +1,4 @@
-export class chat {
+export class Chat {
   id?: any;
   title?: string;
   description?: string;

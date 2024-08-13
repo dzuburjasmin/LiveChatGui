@@ -2,9 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ChatListComponent } from './components/chat-list/chat-list.component';
 import { ChatDetailsComponent } from './components/chat-details/chat-details.component';
-import { AddChatComponent } from './components/add-chat/add-chat.component';
+import { PrivateChatComponent } from './components/private-chat/private-chat.component';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { AuthenticatedGuard } from './services/guards/authenticated.guard';
 
 const routes: Routes = [
   { 
@@ -24,13 +25,21 @@ const routes: Routes = [
       { 
         path: 'chats', component: ChatListComponent 
       },
+      // { 
+      //   path: 'chat/:id', component: ChatDetailsComponent 
+      // },
       { 
-        path: 'chat/:id', component: ChatDetailsComponent 
+        path: 'chat', component: ChatDetailsComponent 
       },
+      // { 
+      //   path: 'add', component: AddChatComponent 
+      // },
       { 
-        path: 'add', component: AddChatComponent 
+        path: 'private/:name/:receiver', component: PrivateChatComponent 
       }
-    ]
+    ],
+    canActivate: [AuthenticatedGuard]
+    ,canActivateChild: [AuthenticatedGuard]
   },
   { 
     path: '**', 

@@ -1,29 +1,7 @@
-<!-- <div class="list row">
-    <div class="input-group mx-auto">
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">User name</label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter user name" [(ngModel)]="userData.userName">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [(ngModel)]="userData.password">
-        </div>
-        <div class="form-group form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
-</div> -->
+<!-- 
 
 <div class="list row">
-<!-- Pills navs -->
 
-<!-- Pills navs -->
-
-<!-- Pills content -->
 <div class="tab-content">
   <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
     <form>
@@ -41,13 +19,11 @@
       </div>
 
 
-      <!-- Email input -->
       <div data-mdb-input-init class="form-outline mb-4">
         <input type="email" id="userName" class="form-control" [(ngModel)]="userData.userName"/>
         <label class="form-label" for="userName">Username</label>
       </div>
 
-      <!-- Password input -->
       <div data-mdb-input-init class="form-outline mb-4">
         <input type="password" id="loginPassword" class="form-control" [(ngModel)]="userData.password"/>
         <label class="form-label" for="loginPassword">Password</label>
@@ -55,7 +31,6 @@
 
 
 
-      <!-- Submit button -->
       <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4" (click)="onSubmit()">Submit</button>
 
 
@@ -84,46 +59,141 @@
 
       <p class="text-center">or:</p>
 
-      <!-- Name input -->
       <div data-mdb-input-init class="form-outline mb-4">
         <input type="text" id="registerName" class="form-control" />
         <label class="form-label" for="registerName">Name</label>
       </div>
 
-      <!-- Username input -->
       <div data-mdb-input-init class="form-outline mb-4">
         <input type="text" id="registerUsername" class="form-control" />
         <label class="form-label" for="registerUsername">Username</label>
       </div>
 
-      <!-- Email input -->
       <div data-mdb-input-init class="form-outline mb-4">
         <input type="email" id="registerEmail" class="form-control" />
         <label class="form-label" for="registerEmail">Email</label>
       </div>
 
-      <!-- Password input -->
       <div data-mdb-input-init class="form-outline mb-4">
         <input type="password" id="registerPassword" class="form-control" />
         <label class="form-label" for="registerPassword">Password</label>
       </div>
 
-      <!-- Repeat Password input -->
       <div data-mdb-input-init class="form-outline mb-4">
         <input type="password" id="registerRepeatPassword" class="form-control" />
         <label class="form-label" for="registerRepeatPassword">Repeat password</label>
       </div>
 
-      <!-- Checkbox -->
       <div class="form-check d-flex justify-content-center mb-4">
         <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
           aria-describedby="registerCheckHelpText" />
 
       </div>
 
-      <!-- Submit button -->
       <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-3">Sign in</button>
     </form>
   </div>
 </div>
-<!-- Pills content --></div>
+</div> -->
+
+<section  class="container-fluid ">
+    
+  <div class="w-100 d-flex flex-row justify-content-center mt-5">
+    <div class="w-100">
+
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center p-3"
+          style="border-top: 4px solid #ffa900;">
+        </div>
+        <div class="card-body" style="position: relative; height: 500px ">
+          <div class="d-md-flex justify-content-around">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+              <div class="text-center mb-3">
+                    <h4 class="">Login</h4>
+              </div>
+              <div class="form-outline">
+                <div class="invalid-feedback">Please fill out this field.</div>
+                <input formControlName="userName" type="email" id="userName" class="form-control" name="userName" 
+                [class.is-invalid]="logInSubmitted && loginForm.get('userName')?.errors">
+                <label class="form-label" for="userName">Username</label>
+                <span class="text-danger" *ngIf="logInSubmitted && loginForm.get('userName')?.hasError('required')">
+                  Username can not be empty.
+                </span>
+                <span class="text-danger" *ngIf="logInSubmitted && loginForm.get('userName')?.hasError('maxlength')">
+                  Username can not exceed 20 characters.
+                </span>
+              </div>
+              <div class="form-outline mb-4">
+                <input formControlName="password" type="password" id="loginPassword" class="form-control" name="password" 
+                [class.is-invalid]="logInSubmitted && loginForm.get('password')?.errors">
+                <label class="form-label" for="loginPassword">Password</label>
+                <span class="text-danger" *ngIf="logInSubmitted && loginForm.get('password')?.hasError('required')">
+                  Password can not be empty.
+                </span>
+                <span class="text-danger" *ngIf="logInSubmitted && (loginForm.get('password')?.hasError('maxlength') || loginForm.get('password')?.hasError('minlength') || loginForm.get('password')?.hasError('capitalLetterAndNonAlphanumeric'))">
+                  Password must be between 8 and 20 characters, with at least one capital letter and one non alphanumeric character.
+                </span>
+              </div>
+              <div class="form floating" *ngIf="loginErrorMessages.length>0">
+                <ul class="text-danger">
+                  <li *ngFor="let error of loginErrorMessages">{{error}}</li>
+                </ul>
+              </div>
+              <button type="submit" class="btn  btn-block mb-4 text-white" style="background-color: #0dcaf0;">Submit</button>
+      
+            </form>
+            <form [formGroup]="signupForm" (ngSubmit)="onRegister()">
+              <div class="text-center mb-3">
+                    <h4 class="">Register</h4>
+              </div>
+              <div class="form-outline">
+                <input formControlName="name"  type="string" id="name" class="form-control" name="name" 
+                [class.is-invalid]="registerSubmitted && signupForm.get('name')?.errors">
+                <label class="form-label" for="name">Name</label>
+                <span class="text-danger" *ngIf="registerSubmitted && signupForm.get('name')?.hasError('required')">
+                  Name can not be empty.
+                </span>
+                <span class="text-danger" *ngIf="registerSubmitted && signupForm.get('name')?.hasError('maxlength')">
+                  Name can not exceed 20 characters.
+                </span>
+              </div>
+              <div class="form-outline">
+                <input formControlName="userName"  type="email" id="userName" class="form-control" name="userName" 
+                [class.is-invalid]="registerSubmitted && signupForm.get('userName')?.errors">
+                <label class="form-label" for="userName">Username</label>
+                <span class="text-danger" *ngIf="registerSubmitted && signupForm.get('userName')?.hasError('required')">
+                  Username can not be empty.
+                </span>
+                <span class="text-danger" *ngIf="registerSubmitted && signupForm.get('userName')?.hasError('maxlength')">
+                  Username can not exceed 20 characters.
+                </span>
+              </div>
+              <div data-mdb-input-init class="form-outline mb-4">
+                <input formControlName="password"  type="password" id="loginPassword" class="form-control" name="password" 
+                [class.is-invalid]="registerSubmitted && signupForm.get('password')?.errors">
+                <label class="form-label" for="loginPassword">Choose a password</label>
+                <span class="text-danger" *ngIf="registerSubmitted && (signupForm.get('password')?.hasError('maxlength') || signupForm.get('password')?.hasError('minlength') || signupForm.get('password')?.hasError('capitalLetterAndNonAlphanumeric'))">
+                  Password must be between 8 and 20 characters, with at least one capital letter and one non alphanumeric character.
+                </span>
+              </div>
+              <div class="form floating" *ngIf="registerErrorMessages.length>0">
+                <ul class="text-danger">
+                  <li *ngFor="let error of registerErrorMessages">{{error}}</li>
+                </ul>
+              </div>
+              <div class="form floating" *ngIf="registerSuccessful">
+                <ul class="text-success">
+                  <li>User registered successfuly!</li>
+                </ul>
+              </div>
+              <button type="submit" class="btn  btn-block mb-4 text-white" style="background-color: #0dcaf0;">Submit</button>
+      
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>

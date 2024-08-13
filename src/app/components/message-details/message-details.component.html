@@ -1,0 +1,21 @@
+<div *ngIf="loggedInUserName==messageData.user" class="d-flex flex-row justify-content-end" >
+  <div  class="d-flex flex-column align-items-end">
+  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+  alt="avatar 1" style="width: 45px; height: 100%;">
+  <p class="small mb-1">{{messageData.user}}</p>
+  <p class="small mb-1 text-muted">{{messageData.dateTime}}</p>
+<div class="d-flex flex-row mb-4 pt-1">
+    <p class="small p-2 me-3 mb-3 text-black rounded-3 bg-light">{{messageData.text}}</p>
+</div>
+</div>
+</div>
+
+<div *ngIf="loggedInUserName!=messageData.user">
+  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava6-bg.webp"
+  alt="avatar 1" style="width: 45px; height: 100%;">
+  <p class="small mb-1">{{messageData.user}}</p>
+  <p class="small mb-1 text-muted">{{messageData.dateTime}}</p>
+  <div class="d-flex flex-row mb-4 pt-1">
+    <p class="small p-2 ms-3 mb-3 rounded-3 bg-info text-white">{{messageData.text}}</p>
+  </div>
+</div>

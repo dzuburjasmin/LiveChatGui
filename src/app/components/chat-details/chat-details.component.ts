@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { chat } from 'src/app/models/chat.model';
+import { Chat } from 'src/app/models/chat.model';
+import { Message } from 'src/app/models/message.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-chat-details',
@@ -10,80 +12,36 @@ import { chat } from 'src/app/models/chat.model';
 })
 export class ChatDetailsComponent implements OnInit {
 
-  currentChat: chat = {
+  currentChat: Chat = {
     title: '',
     description: '',
     published: false
   };
-  message = '';
 
+  public messages : Array<Message> = [];
+  loggedInUsername: string = "";
+  messageText: string = "";
+  currentDate: string = new Date().toLocaleDateString();
   constructor(
-    private chatService: ChatService,
+    public chatService: ChatService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.message = '';
-    this.getChat(this.route.snapshot.params.id);
+    this.loggedInUsername = this.authService.getUserName();
+    this.chatService.createChat(); 
+      
   }
 
-  getChat(id: string): void {
-    this.chatService.get(id)
-      .subscribe(
-        data => {
-          this.currentChat = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
+  sendMessage(){
+    this.chatService.sendMessage(this.messageText);
+    this.messageText = "";
   }
 
-  updatePublished(status: boolean): void {
-    const data = {
-      title: this.currentChat.title,
-      description: this.currentChat.description,
-      published: status
-    };
-
-    this.message = '';
-
-    this.chatService.update(this.currentChat.id, data)
-      .subscribe(
-        response => {
-          this.currentChat.published = status;
-          console.log(response);
-          this.message = response.message ? response.message : 'The status was updated successfully!';
-        },
-        error => {
-          console.log(error);
-        });
+  openPrivateChat(receiver: string){
+    this.router.navigate(['private',this.loggedInUsername, receiver])
   }
-
-  updateChat(): void {
-    this.message = '';
-
-    this.chatService.update(this.currentChat.id, this.currentChat)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.message = response.message ? response.message : 'This chat was updated successfully!';
-        },
-        error => {
-          console.log(error);
-        });
-  }
-
-  deleteChat(): void {
-    this.chatService.delete(this.currentChat.id)
-      .subscribe(
-        response => {
-          console.log(response);
-          this.router.navigate(['/chats']);
-        },
-        error => {
-          console.log(error);
-        });
-  }
+  
 
 }

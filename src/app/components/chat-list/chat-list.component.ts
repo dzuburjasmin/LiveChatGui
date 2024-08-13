@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { chat } from 'src/app/models/chat.model';
+import { Chat } from 'src/app/models/chat.model';
 import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
@@ -9,8 +9,8 @@ import { ChatService } from 'src/app/services/chat.service';
 })
 export class ChatListComponent implements OnInit {
 
-  chats?: chat[];
-  currentChat: chat = {};
+  chats?: Chat[];
+  currentChat: Chat = {};
   currentIndex = -1;
   title = '';
 
@@ -38,36 +38,25 @@ export class ChatListComponent implements OnInit {
     this.currentIndex = -1;
   }
 
-  setActiveChat(chat: chat, index: number): void {
+  setActiveChat(chat: Chat, index: number): void {
     this.currentChat = chat;
     this.currentIndex = index;
   }
 
-  removeAllChats(): void {
-    this.chatService.deleteAll()
-      .subscribe(
-        response => {
-          console.log(response);
-          this.refreshList();
-        },
-        error => {
-          console.log(error);
-        });
-  }
 
-  searchTitle(): void {
-    this.currentChat = {};
-    this.currentIndex = -1;
+  // searchTitle(): void {
+  //   this.currentChat = {};
+  //   this.currentIndex = -1;
 
-    this.chatService.findByTitle(this.title)
-      .subscribe(
-        data => {
-          this.chats = data;
-          console.log(data);
-        },
-        error => {
-          console.log(error);
-        });
-  }
+  //   this.chatService.findByTitle(this.title)
+  //     .subscribe(
+  //       data => {
+  //         this.chats = data;
+  //         console.log(data);
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       });
+  // }
 
 }
