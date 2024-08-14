@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ChatService } from 'src/app/services/chat.service';
 
@@ -15,7 +15,13 @@ export class LayoutComponent implements OnInit {
   }
 
   onLogout(){
-    this.authService.logout();
-    //this.chatService.stopChat();
+    this.chatService.logoutUser().then(()=>{
+      this.authService.logout();
+    })
   }
+
+  // @HostListener('window:beforeunload', ['$event'])
+  // unloadHandler(event: Event): void {
+  //   this.chatService.logoutUser();
+  // }
 }

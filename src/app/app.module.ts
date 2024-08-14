@@ -13,6 +13,9 @@ import { MessageDetailsComponent } from './components/message-details/message-de
 import { JwtModule } from '@auth0/angular-jwt';
 import { UserButtonPipe } from './pipes/userbutton.pipe';
 import { PrivateChatComponent } from './components/private-chat/private-chat.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -35,6 +38,9 @@ export function tokenGetter() {
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatDialogModule,
+    MatButtonModule,
+    NoopAnimationsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

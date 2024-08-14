@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Chat } from 'src/app/models/chat.model';
 import { Message } from 'src/app/models/message.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PrivateChatComponent } from '../private-chat/private-chat.component';
 
 @Component({
   selector: 'app-chat-details',
@@ -25,13 +26,11 @@ export class ChatDetailsComponent implements OnInit {
   constructor(
     public chatService: ChatService,
     private authService: AuthService,
-    private route: ActivatedRoute,
-    private router: Router) { }
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.loggedInUsername = this.authService.getUserName();
     this.chatService.createChat(); 
-      
   }
 
   sendMessage(){
@@ -40,8 +39,16 @@ export class ChatDetailsComponent implements OnInit {
   }
 
   openPrivateChat(receiver: string){
-    this.router.navigate(['private',this.loggedInUsername, receiver])
-  }
-  
+    const dialogRef = this.dialog.open(PrivateChatComponent, {
+      width: '500px',
+      data :{
+        receiver : receiver}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
+  
 }

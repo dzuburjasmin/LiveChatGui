@@ -3,3 +3,23 @@
   max-width: 750px;
   margin: auto;
 }
+
+
+.custom-btn {
+  background-color: transparent;
+  border: none;
+  color: inherit; /* Optional: To keep the text color */
+  padding: 0; /* Optional: To remove padding */
+}
+
+.custom-btn:hover,
+.custom-btn:focus {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.custom-font-bold{
+  font-weight: 900;
+  font-family: cursive;
+}

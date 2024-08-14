@@ -4,15 +4,15 @@
     
 
           <div class="row px-4 py-2 h-100">
-            <div class="col-md-3" >
+            <div class="col-md-3 mb-5" >
               <div class="card-header d-flex justify-content-between align-items-center p-3"
-              style="border-top: 4px solid #80828c;">
-              <h5 class="mb-0">Users</h5>
+              style="border-top: 4px solid #fb8500">
+              <h5 class="mb-0">Online users ({{chatService.onlineUsers.length}})</h5>
             </div>
             <div class="row mt-3 mx-1" *ngFor="let user of chatService.onlineUsers">
               <div class="col">
                 <div class="d-grid">
-                  <button type="button" class="btn btn-success card-text btn-block" (click)="openPrivateChat(user)"
+                  <button type="button" class="btn btn-success card-text btn-block" (click)="openPrivateChat(user)" style="background-color: #ffb703;"
                   [ngClass]="{'btn-info': user == loggedInUsername}" [disabled]="user == loggedInUsername">{{user | UserButton}}</button>
                 </div>
               </div>
@@ -20,9 +20,8 @@
             </div>
             <div class="col-md-9">
               <div class="card-header d-flex justify-content-between align-items-center p-3"
-                style="border-top: 4px solid #80828c;">
+                style="border-top: 4px solid #fb8500">
                 <h5 class="mb-0">Chat messages</h5>
-                <h6 class="mb-0 fw-bolder">{{loggedInUsername | uppercase}}</h6>
               </div>
               <div class="card-body overflow-auto" data-mdb-perfect-scrollbar-init style="position: relative; height: 500px ">          
                 <message-details *ngFor="let message of chatService.messages" [messageData]="message">
@@ -32,7 +31,7 @@
                 <div class="input-group mb-0">
                   <input type="text" class="form-control" placeholder="Type message" name="messageText"
                     aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="messageText"/>
-                  <button class="btn btn-success" type="button" id="button-addon2" style="padding-top: .55rem;" (click)="sendMessage()" [disabled]="!messageText">
+                  <button class="btn btn-success text-white" type="button" id="button-addon2" style="padding-top: .55rem; background-color: #219ebc;" (click)="sendMessage()" [disabled]="!messageText">
                     Send
                   </button>
                 </div>

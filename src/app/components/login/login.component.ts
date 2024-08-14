@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   loginErrorMessages: string[]=[];
   registerErrorMessages: string[]=[];
   registerSuccessful:boolean = false;
-
+  showLogin: boolean = true;
   userData: User = {  };
   test:any;
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
@@ -99,5 +99,13 @@ export class LoginComponent implements OnInit {
   
       return null;
     };
+  }
+
+  toggleisLogin(login: boolean){
+    if(login==true){
+      this.showLogin = true;
+    }else{
+      this.showLogin = false;
+    }
   }
 }

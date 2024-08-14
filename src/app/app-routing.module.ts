@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   { 
     path: '', 
-    redirectTo: 'login', 
+    redirectTo: 'chat', 
     pathMatch: 
     'full' 
   },
@@ -30,12 +30,6 @@ const routes: Routes = [
       // },
       { 
         path: 'chat', component: ChatDetailsComponent 
-      },
-      // { 
-      //   path: 'add', component: AddChatComponent 
-      // },
-      { 
-        path: 'private/:name/:receiver', component: PrivateChatComponent 
       }
     ],
     canActivate: [AuthenticatedGuard]
@@ -43,7 +37,7 @@ const routes: Routes = [
   },
   { 
     path: '**', 
-    component: LoginComponent 
+    component: LayoutComponent 
   },
   
 

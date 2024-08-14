@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-center">
+<!-- <div class="d-flex justify-content-center">
 <div class="col-md-5 py-2">
   <div class="card-header d-flex justify-content-between align-items-center p-3"
     style="border-top: 4px solid #80828c;">
@@ -19,4 +19,24 @@
     </div>
   </div>
 </div>
-</div>
+</div> -->
+
+<mat-dialog-content>
+  <div class="card-header d-flex justify-content-between align-items-center"
+    style="border-top: 4px solid #fb8500">
+    <h5 class="mb-0">{{receiver}}</h5>
+  </div>
+  <div class="card-body overflow-auto" data-mdb-perfect-scrollbar-init style="position: relative; height: 300px ">          
+    <message-details *ngFor="let message of chatService.privateMessages" [messageData]="message">
+    </message-details>  
+  </div>
+  <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">  
+    <div class="input-group mb-0">
+      <input type="text" class="form-control" placeholder="Type message" name="messageText"
+        aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="messageText"/>
+      <button class="btn btn-success" type="button" id="button-addon2" style="padding-top: .55rem; background-color: #219ebc;" (click)="sendMessage()" [disabled]="!messageText">
+        Send
+      </button>
+    </div>
+  </div>
+</mat-dialog-content>

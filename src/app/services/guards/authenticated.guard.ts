@@ -12,7 +12,6 @@ export class AuthenticatedGuard implements CanLoad, CanActivate, OnDestroy {
   constructor(
     @Inject(AuthService) private authService: AuthService,
     @Inject(Router) private router: Router) {
-    //debugger;
 
   }
   canLoad(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> | Promise<boolean> {
