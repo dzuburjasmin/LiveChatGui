@@ -6,6 +6,7 @@ import { PrivateChatComponent } from './components/private-chat/private-chat.com
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { AuthenticatedGuard } from './services/guards/authenticated.guard';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 const routes: Routes = [
   { 
@@ -22,11 +23,8 @@ const routes: Routes = [
     path : '',
     component: LayoutComponent,
     children:[
-      { 
-        path: 'chats', component: ChatListComponent 
-      },
       // { 
-      //   path: 'chat/:id', component: ChatDetailsComponent 
+      //   path: 'chats', component: ChatListComponent 
       // },
       { 
         path: 'chat', component: ChatDetailsComponent 
@@ -37,7 +35,7 @@ const routes: Routes = [
   },
   { 
     path: '**', 
-    component: LayoutComponent 
+    component: NotFoundComponent 
   },
   
 

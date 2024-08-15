@@ -1,0 +1,17 @@
+.list {
+  text-align: left;
+  max-width: 750px;
+  margin: auto;
+}
+
+.custom-font{
+  font-weight: 900;
+  font-family: cursive;
+}
+
+.font-color{
+  color:#ffb703;
+}
+.bg-color{
+  background-color: #ffb703;
+}

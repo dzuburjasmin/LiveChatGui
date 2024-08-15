@@ -52,26 +52,35 @@ export class ChatService {
       this.onlineUsers = [...onlineUsers];
     });
 
+    this.hubConnection.on("MessageHistory", (messageHistory)=>{
+      console.log("Message History !");
+      this.messages = [...messageHistory];
+    });
+
     this.hubConnection.on("NewMessage", (message: Message)=>{
       console.log("New Message !");
-      this.messages = [...this.messages, message]
+      this.messages = [message, ...this.messages]
     });
 
     this.hubConnection.on("OpenPrivateChat", (message: Message)=>{
       console.log("Open Private Chat !");
-      this.privateMessages = [...this.privateMessages, message];
+      this.privateMessages = [message, ...this.privateMessages];
       this.privateChatStarted = true;
       this.openPrivateChat(message.user);
     });
 
     this.hubConnection.on("NewPrivateMessage", (message: Message)=>{
       console.log("New private message !");
-      this.privateMessages = [...this.privateMessages, message]
+      this.privateMessages = [message, ...this.privateMessages]
     });
 
     this.hubConnection.on("ClosePrivateChat", ()=>{
       this.privateChatStarted = false;
       this.privateMessages=[];
+    });
+
+    this.hubConnection.on("MessageLimitReached", ()=>{
+      alert("Message limit reached, please wait...")
     });
   }
 
@@ -87,7 +96,7 @@ export class ChatService {
     var message: Message = {
       user: this.authService.getUserName(),
       text : text,
-      dateTime: new Date().toLocaleDateString()
+      dateTime: new Date()
     }
     return this.hubConnection?.invoke("ReceiveMessage",message).catch(error=>{
       console.log(error);
@@ -102,7 +111,7 @@ export class ChatService {
     var message: Message = {
       user: this.authService.getUserName(),
       text : text,
-      dateTime: new Date().toLocaleDateString(),
+      dateTime: new Date(),
       receiver: receiver
     }
     if(this.privateChatStarted==false){

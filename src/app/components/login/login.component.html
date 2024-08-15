@@ -2,10 +2,10 @@
 
 <nav class="navbar navbar-expand text-white d-flex flex-row justify-content-center" style="background-color: #023047">
   <li class="nav">
-    <a class="nav-link text-white custom-font-bold" id="tab-login" role="tab" (click)="toggleisLogin(true);" >Login</a>
+    <a class="nav-link text-white custom-font-bold" id="tab-login" role="tab" (click)="toggleisLogin(true);" [ngClass]="{'activeButton':showLogin == true}">Login</a>
   </li>
   <li class="nav" > 
-    <a class="nav-link text-white custom-font-bold" id="tab-register" role="tab" (click)="toggleisLogin(false);">Register</a>
+    <a class="nav-link text-white custom-font-bold" id="tab-register" role="tab" (click)="toggleisLogin(false);" [ngClass]="{'activeButton':showLogin == false}">Register</a>
   </li>
 
 </nav>

@@ -23,7 +23,7 @@
                 style="border-top: 4px solid #fb8500">
                 <h5 class="mb-0">Chat messages</h5>
               </div>
-              <div class="card-body overflow-auto" data-mdb-perfect-scrollbar-init style="position: relative; height: 500px ">          
+              <div class="card-body overflow-auto reverseClass" data-mdb-perfect-scrollbar-init style="position: relative; height: 500px ">          
                 <message-details *ngFor="let message of chatService.messages" [messageData]="message">
                 </message-details>  
               </div>

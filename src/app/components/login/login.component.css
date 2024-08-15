@@ -8,3 +8,8 @@
   font-weight: bold;
   cursor: pointer;
 }
+
+.activeButton{
+  background-color: white;
+  color: #023047 !important;
+}
