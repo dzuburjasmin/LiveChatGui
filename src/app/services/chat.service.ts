@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { Chat } from '../models/chat.model';
-import { HttpTransportType, HubConnection, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
+import { HubConnection, HubConnectionBuilder, IHttpConnectionOptions, LogLevel } from '@microsoft/signalr';
 import { AuthService } from './auth.service';
 import { Message } from '../models/message.model';
 import { Router } from '@angular/router';
@@ -26,18 +24,7 @@ export class ChatService {
   constructor(private http: HttpClient, private authService: AuthService, private router: Router, private dialog: MatDialog) {
       this.token = localStorage.getItem('token');
    }
-
-  getAll() {
-    return this.http.get(baseUrl+"/api/Message",{withCredentials:true});
-  }
-
-  get(id: any): Observable<Chat> {
-    return of({
-      "id":1,
-      "data":"test"
-    })
-  }
-
+  
   createChat(){
     this.hubConnection = new HubConnectionBuilder().configureLogging(LogLevel.Debug).withUrl(baseUrl+"/hubs",{withCredentials:true,accessTokenFactory: () => this.token }).withAutomaticReconnect().build();
     this.hubConnection.start().catch(error=>{console.log(error)});
@@ -63,7 +50,7 @@ export class ChatService {
     });
 
     this.hubConnection.on("OpenPrivateChat", (message: Message)=>{
-      console.log("Open Private Chat !");
+      console.log("Open Private !");
       this.privateMessages = [message, ...this.privateMessages];
       this.privateChatStarted = true;
       this.openPrivateChat(message.user);

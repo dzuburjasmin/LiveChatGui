@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'src/app/services/chat.service';
-import { Chat } from 'src/app/models/chat.model';
 import { Message } from 'src/app/models/message.model';
 import { AuthService } from 'src/app/services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -12,12 +11,6 @@ import { PrivateChatComponent } from '../private-chat/private-chat.component';
   styleUrls: ['./chat-details.component.css']
 })
 export class ChatDetailsComponent implements OnInit {
-
-  currentChat: Chat = {
-    title: '',
-    description: '',
-    published: false
-  };
 
   public messages : Array<Message> = [];
   loggedInUsername: string = "";

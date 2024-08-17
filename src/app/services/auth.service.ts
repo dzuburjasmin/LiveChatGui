@@ -13,16 +13,7 @@ export class AuthService {
   private jwtHelper = new JwtHelperService();
   public isAuthenticated$: Observable<boolean>;
   public isAuthenticatedSubject$: BehaviorSubject<boolean>;
-  public testReturnObjTrue: any = {
-    "result":true,
-    "token": "blablabla",
-    "message": "Successful"
-  };
-  public testReturnObjFalse: any = {
-    "result":false,
-    "token": null,
-    "message": "Failed"
-  };
+
   constructor(private http: HttpClient, private router: Router) {
     this.isAuthenticatedSubject$ = new BehaviorSubject<boolean>(true);
     this.isAuthenticated$ = this.isAuthenticatedSubject$.asObservable();
@@ -39,14 +30,9 @@ export class AuthService {
     const token = localStorage.getItem('token');
     return !!token && !this.jwtHelper.isTokenExpired(token);
   }
-  startLogin(){ //after not authorized just redirect - this is not the login method
+  startLogin(){
     this.router.navigate(['login']);
   }
-  // login(): Observable<any>{ //TESTNA METODA
-  //   debugger
-  //   //return this.http.get(`${baseUrl}`); ovde ce ic fino metoda na api
-  //   return of(this.testReturnObjTrue);
-  // }
   logout(){
     this.isAuthenticatedSubject$.next(false);
     localStorage.setItem("token","")

@@ -20,8 +20,4 @@ export class LayoutComponent implements OnInit {
     })
   }
 
-  // @HostListener('window:beforeunload', ['$event'])
-  // unloadHandler(event: Event): void {
-  //   this.chatService.logoutUser();
-  // }
 }

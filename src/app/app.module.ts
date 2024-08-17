@@ -6,7 +6,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChatDetailsComponent } from './components/chat-details/chat-details.component';
-import { ChatListComponent } from './components/chat-list/chat-list.component';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { MessageDetailsComponent } from './components/message-details/message-details.component';
@@ -17,6 +16,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { environment } from 'src/environments/environment';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -28,7 +28,6 @@ export function tokenGetter() {
     PrivateChatComponent,
     ChatDetailsComponent,
     MessageDetailsComponent,
-    ChatListComponent,
     LoginComponent,
     LayoutComponent,
     NotFoundComponent,
@@ -46,7 +45,7 @@ export function tokenGetter() {
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['localhost:5115'], // koji ce bit?
+        allowedDomains: [environment.baseUrl],
         disallowedRoutes: []
       }
     })

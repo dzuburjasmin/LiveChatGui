@@ -8,8 +8,8 @@
 .custom-btn {
   background-color: transparent;
   border: none;
-  color: inherit; /* Optional: To keep the text color */
-  padding: 0; /* Optional: To remove padding */
+  color: inherit; 
+  padding: 0; 
 }
 
 .custom-btn:hover,

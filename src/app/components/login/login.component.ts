@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+
   loginForm: FormGroup = new FormGroup({});
   signupForm: FormGroup = new FormGroup({});
   logInSubmitted: boolean = false;
@@ -20,11 +21,13 @@ export class LoginComponent implements OnInit {
   showLogin: boolean = true;
   userData: User = {  };
   test:any;
+
   constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.initForms();
   }
+  
   initForms(){
     this.loginForm=this.formBuilder.group({
       userName: ["", [Validators.required, Validators.maxLength(20)]],
@@ -63,6 +66,7 @@ export class LoginComponent implements OnInit {
     }) 
   }
   }
+
   onRegister(){
 
     this.registerSubmitted=true;

@@ -15,7 +15,7 @@ export class AuthenticatedGuard implements CanLoad, CanActivate, OnDestroy {
 
   }
   canLoad(route: Route, segments: UrlSegment[]): boolean | Observable<boolean> | Promise<boolean> {
-    return this.isAuthenticated(); //throw new Error('Method not implemented.');
+    return this.isAuthenticated(); 
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
